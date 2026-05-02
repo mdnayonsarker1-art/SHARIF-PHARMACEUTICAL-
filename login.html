@@ -3,116 +3,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sharif Pharma - Login</title>
+    <title>Auth - Sharif Pharma</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
-        body {
-            background: radial-gradient(circle at top right, #1e40af, #0f172a);
-            min-height: 100vh;
-            display: flex; align-items: center; justify-content: center;
-            font-family: 'Inter', sans-serif;
-        }
-        .login-card {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 40px; border-radius: 30px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            width: 90%; max-width: 400px;
-        }
-        .input-field {
-            width: 100%; padding: 12px 15px; border-radius: 12px;
-            border: 2px solid #e2e8f0; margin-bottom: 15px;
-            outline: none; transition: 0.3s;
-        }
-        .input-field:focus { border-color: #2563eb; }
-        .action-btn {
-            width: 100%; padding: 12px; border-radius: 12px;
-            background: #2563eb; color: white; font-weight: bold;
-            transition: 0.3s; margin-bottom: 10px;
-        }
-        .action-btn:hover { background: #1e40af; }
-        .toggle-text { color: #64748b; font-size: 14px; cursor: pointer; text-align: center; }
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap');
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .form-container { display: none; }
+        .form-active { display: block; }
     </style>
 </head>
-<body>
+<body class="flex items-center justify-center min-h-screen p-4">
 
-    <div class="login-card animate__animated animate__zoomIn">
-        <div class="text-center mb-8">
-            <h1 class="text-2xl font-black text-blue-800">SHARIF PHARMA</h1>
-            <p id="form-title" class="text-slate-500 font-bold uppercase text-xs tracking-widest mt-2">Login to Account</p>
+    <div class="w-full max-w-md bg-white p-8 rounded-3xl shadow-sm border border-slate-100 animate__animated animate__fadeIn">
+        
+        <div id="login-section" class="form-container form-active">
+            <h2 class="text-2xl font-black text-center text-slate-800 mb-6 uppercase tracking-wider">Login</h2>
+            <form id="login-form" class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Email</label>
+                    <input type="email" id="login-email" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all" placeholder="আপনার ইমেইল" required>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Password</label>
+                    <input type="password" id="login-password" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all" placeholder="পাসওয়ার্ড" required>
+                </div>
+                <div class="flex justify-end">
+                    <button type="button" onclick="handleForgetPassword()" class="text-[11px] font-bold text-blue-500 hover:underline uppercase">Forget Password?</button>
+                </div>
+                <button type="submit" class="w-full p-4 bg-blue-500 text-white font-black rounded-2xl shadow-lg shadow-blue-200 hover:bg-blue-600 transition-all uppercase">Login Now</button>
+            </form>
+            <p class="text-center mt-6 text-sm text-slate-500">
+                Don't have an account? <button onclick="toggleForm('signup')" class="text-blue-500 font-bold hover:underline">Register</button>
+            </p>
         </div>
 
-        <div id="login-form">
-            <input type="email" id="email" class="input-field" placeholder="Email Address">
-            <input type="password" id="password" class="input-field" placeholder="Password">
-            <button id="loginBtn" class="action-btn">LOGIN</button>
-            <p class="toggle-text" onclick="toggleForm()">Don't have an account? <span class="text-blue-600 font-bold">Sign Up</span></p>
+        <div id="signup-section" class="form-container">
+            <h2 class="text-2xl font-black text-center text-slate-800 mb-6 uppercase tracking-wider">Register</h2>
+            <form id="signup-form" class="space-y-4">
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Full Name</label>
+                    <input type="text" id="signup-name" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all" placeholder="আপনার নাম" required>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Email Address</label>
+                    <input type="email" id="signup-email" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all" placeholder="ইমেইল দিন" required>
+                </div>
+                <div>
+                    <label class="text-[10px] font-bold text-slate-400 uppercase ml-1">Password</label>
+                    <input type="password" id="signup-password" class="w-full p-4 bg-slate-50 border border-slate-100 rounded-2xl focus:outline-none focus:border-blue-500 transition-all" placeholder="পাসওয়ার্ড সেট করুন" required>
+                </div>
+                <button type="submit" class="w-full p-4 bg-green-500 text-white font-black rounded-2xl shadow-lg shadow-green-200 hover:bg-green-600 transition-all uppercase">Create Account</button>
+            </form>
+            <p class="text-center mt-6 text-sm text-slate-500">
+                Already have an account? <button onclick="toggleForm('login')" class="text-blue-500 font-bold hover:underline">Login</button>
+            </p>
         </div>
 
-        <div id="signup-form" class="hidden">
-            <input type="email" id="new-email" class="input-field" placeholder="New Email">
-            <input type="password" id="new-password" class="input-field" placeholder="New Password">
-            <button id="signupBtn" class="action-btn bg-emerald-600 hover:bg-emerald-700">CREATE ACCOUNT</button>
-            <p class="toggle-text" onclick="toggleForm()">Already have an account? <span class="text-blue-600 font-bold">Login</span></p>
-        </div>
     </div>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // আপনার নতুন Firebase Config
         const firebaseConfig = {
             apiKey: "AIzaSyAQyZ3CcmzNxVbq2xwj-P89xohIVODrh1Y",
             authDomain: "nayon366-f79c6.firebaseapp.com",
             projectId: "nayon366-f79c6",
             storageBucket: "nayon366-f79c6.firebasestorage.app",
             messagingSenderId: "462628331277",
-            appId: "1:462628331277:web:22bf04b3e0221470981a44",
-            measurementId: "G-KRYX309ER8"
+            appId: "1:462628331277:web:22bf04b3e0221470981a44"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
+        const db = getFirestore(app);
 
-        // লগইন করা থাকলে সরাসরি ড্যাশবোর্ডে পাঠানো
-        onAuthStateChanged(auth, (user) => {
-            if (user) window.location.href = 'index.html';
-        });
+        // --- Toggle Logic ---
+        window.toggleForm = (type) => {
+            document.getElementById('login-section').classList.remove('form-active');
+            document.getElementById('signup-section').classList.remove('form-active');
+            if(type === 'login') document.getElementById('login-section').classList.add('form-active');
+            else document.getElementById('signup-section').classList.add('form-active');
+        }
 
-        // লগইন ফাংশন
-        document.getElementById('loginBtn').onclick = async () => {
-            const email = document.getElementById('email').value;
-            const pass = document.getElementById('password').value;
+        // --- Login Logic ---
+        document.getElementById('login-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
-                window.location.href = 'index.html';
-            } catch (err) {
-                alert("ভুল ইমেইল বা পাসওয়ার্ড!");
-            }
+                window.location.href = "index.html";
+            } catch (err) { alert("ভুল ইমেইল বা পাসওয়ার্ড!"); }
         };
 
-        // সাইন-আপ ফাংশন
-        document.getElementById('signupBtn').onclick = async () => {
-            const email = document.getElementById('new-email').value;
-            const pass = document.getElementById('new-password').value;
-            if(pass.length < 6) return alert("পাসওয়ার্ড কমপক্ষে ৬ অক্ষরের হতে হবে!");
+        // --- Signup Logic ---
+        document.getElementById('signup-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const name = document.getElementById('signup-name').value;
+            const email = document.getElementById('signup-email').value;
+            const pass = document.getElementById('signup-password').value;
             try {
-                await createUserWithEmailAndPassword(auth, email, pass);
+                const res = await createUserWithEmailAndPassword(auth, email, pass);
+                await setDoc(doc(db, "user_settings", res.user.uid), {
+                    profile: { name: name, email: email, bizName: "Sharif Pharma" }
+                });
                 alert("অ্যাকাউন্ট তৈরি হয়েছে!");
-                window.location.href = 'index.html';
-            } catch (err) {
-                alert("অ্যাকাউন্ট তৈরি করা যায়নি! ইমেইল চেক করুন।");
-            }
+                window.location.href = "index.html";
+            } catch (err) { alert("এরর: " + err.message); }
         };
 
-        // ফর্ম পরিবর্তন
-        window.toggleForm = () => {
-            document.getElementById('login-form').classList.toggle('hidden');
-            document.getElementById('signup-form').classList.toggle('hidden');
-            const title = document.getElementById('form-title');
-            title.innerText = title.innerText === 'LOGIN TO ACCOUNT' ? 'CREATE NEW ACCOUNT' : 'LOGIN TO ACCOUNT';
+        // --- Forget Password Logic ---
+        window.handleForgetPassword = async () => {
+            const email = document.getElementById('login-email').value;
+            if (!email) { alert("প্রথমে ইমেইলটি লিখুন!"); return; }
+            try {
+                await sendPasswordResetEmail(auth, email);
+                alert("পাসওয়ার্ড রিসেট লিঙ্ক ইমেইলে পাঠানো হয়েছে!");
+            } catch (err) { alert("এরর: " + err.message); }
         };
     </script>
 </body>
